@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Performance List</title>
+</head>
+<body>
+<h1>Performance List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Venue</th>
+        <th>Total Seats</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="performance : ${performances}">
+        <td th:text="${performance.title}">Title</td>
+        <td th:text="${performance.date}">Date</td>
+        <td th:text="${performance.time}">Time</td>
+        <td th:text="${performance.venue}">Venue</td>
+        <td th:text="${performance.total_seats}">Total Seats</td>
+
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Create Performance</title>
+</head>
+<body>
+<h1>Create Performance</h1>
+<form action="#" th:action="@{/dailband/boards/performances/create}" th:object="${performance}" method="post">
+  <div>
+    <label for="title">Title:</label>
+    <input type="text" id="title" th:field="*{title}" required />
+  </div>
+  <div>
+    <label for="date">Date:</label>
+    <input type="date" id="date" th:field="*{date}" required />
+  </div>
+  <div>
+    <label for="time">Time:</label>
+    <input type="time" id="time" th:field="*{time}" step="1" required />
+  </div>
+  <div>
+    <label for="totalSeats">Total Seats:</label>
+    <input type="number" id="totalSeats" th:field="*{total_seats}" required />
+  </div>
+  <div>
+    <label for="venue">Venue:</label>
+    <input type="text" id="venue" th:field="*{venue}" required />
+  </div>
+  <div>
+    <button type="submit">Create</button>
+  </div>
+</form>
+</body>
+</html>

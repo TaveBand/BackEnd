@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Performance Detail</title>
+</head>
+<body>
+<h1>Performance Detail</h1>
+<div>
+    <h2 th:text="${performance.title}"></h2>
+    <p>Date: <span th:text="${performance.date}"></span></p>
+    <p>Time: <span th:text="${performance.time}"></span></p>
+    <p>Venue: <span th:text="${performance.venue}"></span></p>
+    <p>Total Seats: <span th:text="${performance.total_seats}"></span></p>
+</div>
+</body>
+</html>
