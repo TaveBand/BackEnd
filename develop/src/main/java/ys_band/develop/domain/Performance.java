@@ -12,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Performance {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long performance_id;
@@ -34,18 +35,19 @@ public class Performance {
     @Column(nullable = false)
     private int current_seats;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @OneToMany(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations;
 
-    // 이미지 파일 경로 추가
     @Column
     private String image_path;
 
     public Performance() {
         this.current_seats = 0;
     }
+
+
 }
