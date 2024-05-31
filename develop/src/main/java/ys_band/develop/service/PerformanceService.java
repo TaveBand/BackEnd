@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import ys_band.develop.domain.Performance;
 import ys_band.develop.domain.User;
 import ys_band.develop.dto.DtoConverter;
-import ys_band.develop.dto.performance.PerformanceCreateDto;
-import ys_band.develop.dto.performance.PerformanceDto;
+import ys_band.develop.dto.performance.PerformancePostDto;
+import ys_band.develop.dto.performance.PerformanceGetDto;
 import ys_band.develop.repository.PerformanceRepository;
 import ys_band.develop.repository.UserRepository;
 
@@ -27,23 +27,23 @@ public class PerformanceService {
         this.userRepository = userRepository;
     }
 
-    public List<PerformanceDto> findAllPerformances() {
+    public List<PerformanceGetDto> findAllPerformances() {
         List<Performance> performances = performanceRepository.findAll();
         return DtoConverter.toPerformanceDtoList(performances);
     }
 
-    public Optional<PerformanceDto> findPerformanceById(Long id) {
+    public Optional<PerformanceGetDto> findPerformanceById(Long id) {
         Optional<Performance> performance = performanceRepository.findById(id);
-        return performance.map(DtoConverter::toPerformanceDto);
+        return performance.map(DtoConverter::getPerformanceDto);
     }
 
     @Transactional
-    public PerformanceDto savePerformance(PerformanceCreateDto performanceCreateDto) {
-        User user = userRepository.findById(performanceCreateDto.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found for id: " + performanceCreateDto.getUserId()));
-        Performance performance = DtoConverter.toPerformanceEntity(performanceCreateDto, user);
+    public PerformanceGetDto savePerformance(PerformancePostDto performancePostDto) {
+        User user = userRepository.findById(performancePostDto.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("User not found for id: " + performancePostDto.getUserId()));
+        Performance performance = DtoConverter.postPerformanceEntity(performancePostDto, user);
         Performance savedPerformance = performanceRepository.save(performance);
-        return DtoConverter.toPerformanceDto(savedPerformance);
+        return DtoConverter.getPerformanceDto(savedPerformance);
     }
 
     @Transactional

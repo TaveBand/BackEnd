@@ -43,9 +43,9 @@ public class Performance {
 
     // 이미지 파일 경로 추가
     @Column
-    private String imagePath;
+    private String image_path;
 
     public Performance() {
-        this.current_seats = this.total_seats;
+        this.current_seats = 0;
     }
 }

@@ -3,8 +3,8 @@ package ys_band.develop.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ys_band.develop.dto.performance.PerformanceCreateDto;
-import ys_band.develop.dto.performance.PerformanceDto;
+import ys_band.develop.dto.performance.PerformancePostDto;
+import ys_band.develop.dto.performance.PerformanceGetDto;
 import ys_band.develop.service.PerformanceService;
 
 import java.util.List;
@@ -21,20 +21,20 @@ public class PerformanceController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PerformanceDto>> getAllPerformances() {
-        List<PerformanceDto> performances = performanceService.findAllPerformances();
+    public ResponseEntity<List<PerformanceGetDto>> getAllPerformances() {
+        List<PerformanceGetDto> performances = performanceService.findAllPerformances();
         return ResponseEntity.ok(performances);
     }
 
     @GetMapping("/{performance_id}")
-    public ResponseEntity<PerformanceDto> getPerformanceById(@PathVariable("performance_id") Long performanceId) {
-        Optional<PerformanceDto> performance = performanceService.findPerformanceById(performanceId);
+    public ResponseEntity<PerformanceGetDto> getPerformanceById(@PathVariable("performance_id") Long performanceId) {
+        Optional<PerformanceGetDto> performance = performanceService.findPerformanceById(performanceId);
         return performance.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/create")
-    public ResponseEntity<PerformanceDto> savePerformance(@RequestBody PerformanceCreateDto performanceCreateDto) {
-        PerformanceDto savedPerformance = performanceService.savePerformance(performanceCreateDto);
+    public ResponseEntity<PerformanceGetDto> savePerformance(@RequestBody PerformancePostDto performancePostDto) {
+        PerformanceGetDto savedPerformance = performanceService.savePerformance(performancePostDto);
         return ResponseEntity.ok(savedPerformance);
     }
 
