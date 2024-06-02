@@ -17,6 +17,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
 
+
+    //고운 db는 schoolId로 되어있을 듯함.
     @Column(name = "school_id", nullable = false)
     private String schoolId;
 
