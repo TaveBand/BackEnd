@@ -45,6 +45,6 @@ public class ReservationController {
         }
 
         List<ReservationDto> reservations = reservationService.findReservationsByUserId(userId);
-        return ResponseEntity.ok(reservations);
+        return ResponseEntity.ok(reservations); // ok?
     }
 }
