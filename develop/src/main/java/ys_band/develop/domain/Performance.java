@@ -20,6 +20,9 @@ public class Performance {
     @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false, length = 500)
+    private String content; // 추가된 속성
+
     @Column(nullable = false)
     private java.sql.Date date;
 
