@@ -90,4 +90,17 @@ public class ReservationService {
 
         reservationRepository.deleteById(id);
     }
+
+    /**
+     * 사용자 ID로 해당 사용자가 소유한 예약들을 조회합니다.
+     *
+     * @param userId 사용자 ID
+     * @return 해당 사용자가 소유한 예약 목록
+     */
+    public List<ReservationDto> findReservationsByUserId(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found for id: " + userId));
+        List<Reservation> reservations = reservationRepository.findByUser(user);
+        return ReservationDtoConverter.toReservationDtoList(reservations);
+    }
 }
