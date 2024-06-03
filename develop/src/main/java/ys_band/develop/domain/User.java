@@ -31,11 +31,11 @@ public class User {
     @Column(nullable = false)
     private String nickname;
 
-    @Column(nullable = false)
-    private String firstName;
+    //@Column(nullable = false)
+   //Private String firstName;
 
-    @Column(nullable = false)
-    private String lastName;
+    //@Column(nullable = false)
+    //private String lastName;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -45,6 +45,28 @@ public class User {
 
     @Column(name = "modified_at", nullable = false)
     private LocalDateTime modifiedAt;
+
+//////
+    private String session;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Session> sessions;
+
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments;
+
+    @OneToMany(mappedBy = "user")
+    private List<Scrap> scraps;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Performance> performances;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reservation> reservations;
 
     @PrePersist
     protected void onCreate() {
@@ -57,9 +79,4 @@ public class User {
         modifiedAt = LocalDateTime.now();
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Performance> performances;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Reservation> reservations;
 }

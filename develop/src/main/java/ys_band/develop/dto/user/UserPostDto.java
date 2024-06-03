@@ -5,12 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserDto {      //  to 클라이언트
-    private Long userId;
+public class UserPostDto {
     private String schoolId;
+    private String password;
     private String username;
     private String nickname;
-    private String firstName;
-    private String lastName;
     private String email;
+    private String session;
 }

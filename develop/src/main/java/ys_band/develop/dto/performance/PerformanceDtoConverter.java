@@ -3,8 +3,6 @@ package ys_band.develop.dto.performance;
 
 import ys_band.develop.domain.Performance;
 import ys_band.develop.domain.User;
-import ys_band.develop.dto.user.UserCreateDto;
-import ys_band.develop.dto.user.UserDto;
 
 import java.util.List;
 import java.util.stream.Collectors;

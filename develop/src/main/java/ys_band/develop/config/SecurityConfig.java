@@ -1,26 +1,17 @@
 package ys_band.develop.config;
-/*
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.reactive.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import ys_band.develop.service.UserService;
 
-import java.io.IOException;
-*/
-/*
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -49,10 +40,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 // 요청에 대한 권한 설정
                 .authorizeHttpRequests(requests -> requests
-                        // 루트, 로그인, 회원가입 경로는 인증 없이 접근 가능
-                        .requestMatchers("/", "/login", "/register").permitAll()
+                        // 루트, 로그인, 회원가입 경로는 인증 없이 접근 가
                         // 그 외의 모든 요청은 인증 필요
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 // 폼 로그인 설정
                 .formLogin(form -> form
@@ -80,4 +70,3 @@ public class SecurityConfig {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
     }
 }
-*/
