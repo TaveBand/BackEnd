@@ -1,5 +1,6 @@
 package ys_band.develop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -49,9 +50,6 @@ public class User {
 //////
     private String session;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Session> sessions;
-
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
 
@@ -68,6 +66,14 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations;
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_session",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "session_id")
+    )
+    @JsonIgnore
+    private List<Session> sessions;
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
