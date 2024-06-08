@@ -24,7 +24,6 @@ public class MyPrService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final FileRepository fileRepository;
-
     private final BoardRepository boardRepository;
 
     @Autowired
@@ -46,17 +45,22 @@ public class MyPrService {
         post.setUser(currentUser);
         post.setBoard(board);
 
-        if (myPrGetDTO.getFile_url() != null) {
+        if (myPrGetDTO.getFileUrl() != null) {
             File file = new File();
-            file.setFile_url(myPrGetDTO.getFile_url());
-            file.setFile_type(determineFileType(myPrGetDTO.getFile_url()));
+            file.setFile_url(myPrGetDTO.getFileUrl());
+            file.setFile_type(determineFileType(myPrGetDTO.getFileUrl()));
+            // Post 저장
+            Post savedPost = postRepository.save(post);
+            file.setPost(savedPost);
+            // File 저장
             File savedFile = fileRepository.save(file);
-            post.setFile(savedFile);
+            savedPost.setFile(savedFile);
+            postRepository.save(savedPost);
+        } else {
+            postRepository.save(post);
         }
 
-        Post savedPost = postRepository.save(post);
-
-        return savedPost.getPost_id();
+        return post.getPost_id();
     }
 
     public List<MyPrPostDTO> getAllMyPrPosts() {
@@ -87,10 +91,11 @@ public class MyPrService {
         post.setTitle(myPrGetDTO.getTitle());
         post.setContent(myPrGetDTO.getContent());
 
-        if (myPrGetDTO.getFile_url() != null) {
+        if (myPrGetDTO.getFileUrl() != null) {
             File file = new File();
-            file.setFile_url(myPrGetDTO.getFile_url());
-            file.setFile_type(determineFileType(myPrGetDTO.getFile_url()));
+            file.setFile_url(myPrGetDTO.getFileUrl());
+            file.setFile_type(determineFileType(myPrGetDTO.getFileUrl()));
+            file.setPost(post);
             File savedFile = fileRepository.save(file);
             post.setFile(savedFile);
         }
@@ -121,8 +126,10 @@ public class MyPrService {
         myPrPostDTO.setCreatedAt(post.getCreated_at());
         myPrPostDTO.setModifiedAt(post.getModified_at());
         myPrPostDTO.setNickname(post.getUser().getNickname());
+        myPrPostDTO.setEmail(post.getUser().getEmail());
         myPrPostDTO.setComments(post.getComments());
         myPrPostDTO.setSessions(post.getUser().getSessions());
+
         return myPrPostDTO;
     }
 

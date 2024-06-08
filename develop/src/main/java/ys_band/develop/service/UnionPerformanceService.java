@@ -37,7 +37,7 @@ public class UnionPerformanceService {
     public Long createPerformancePost(UnionPerformanceGetDTO unionPerformanceGetDTO, UserDetails userDetails) {
         User currentUser = userRepository.findByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new UserException("User not found"));
-        Board board = boardRepository.findByName("pr")
+        Board board = boardRepository.findByName("union-performances")
                 .orElseThrow(() -> new RuntimeException("Board not found"));
         Post post = new Post();
         post.setTitle(unionPerformanceGetDTO.getTitle());
@@ -45,10 +45,10 @@ public class UnionPerformanceService {
         post.setUser(currentUser);
         post.setBoard(board);
 
-        if (unionPerformanceGetDTO.getFile_url() != null) {
+        if (unionPerformanceGetDTO.getFileUrl() != null) {
             File file = new File();
-            file.setFile_url(unionPerformanceGetDTO.getFile_url());
-            file.setFile_type(determineFileType(unionPerformanceGetDTO.getFile_url()));
+            file.setFile_url(unionPerformanceGetDTO.getFileUrl());
+            file.setFile_type(determineFileType(unionPerformanceGetDTO.getFileUrl()));
             File savedFile = fileRepository.save(file);
             post.setFile(savedFile);
         }
@@ -60,7 +60,7 @@ public class UnionPerformanceService {
 
     public List<UnionPerformancePostDTO> getAllUnionPerformancePosts() {
 
-        Board board = boardRepository.findByName("UnionPerformance")
+        Board board = boardRepository.findByName("union-performances")
                 .orElseThrow(() -> new RuntimeException("Board not found"));
 
 
@@ -90,10 +90,10 @@ public class UnionPerformanceService {
         post.setTitle(unionPerformanceGetDTO.getTitle());
         post.setContent(unionPerformanceGetDTO.getContent());
 
-        if (unionPerformanceGetDTO.getFile_url() != null) {
+        if (unionPerformanceGetDTO.getFileUrl() != null) {
             File file = new File();
-            file.setFile_url(unionPerformanceGetDTO.getFile_url());
-            file.setFile_type(determineFileType(unionPerformanceGetDTO.getFile_url()));
+            file.setFile_url(unionPerformanceGetDTO.getFileUrl());
+            file.setFile_type(determineFileType(unionPerformanceGetDTO.getFileUrl()));
             File savedFile = fileRepository.save(file);
             post.setFile(savedFile);
         }
