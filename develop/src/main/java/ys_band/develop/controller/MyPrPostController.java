@@ -25,7 +25,7 @@ public class MyPrPostController {
         this.myPrService = myPrService;
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<Map<String, Object>> createMyPrPost(@RequestBody MyPrGetDTO myPrGetDTO, @AuthenticationPrincipal UserDetails userDetails) {
         Long postId = myPrService.createMyPrPost(myPrGetDTO, userDetails);
         Map<String, Object> response = new HashMap<>();
