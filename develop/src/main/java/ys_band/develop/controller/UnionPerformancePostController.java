@@ -24,7 +24,7 @@ public class UnionPerformancePostController {
     public UnionPerformancePostController(UnionPerformanceService unionPerformanceService) {
         this.unionPerformanceService = unionPerformanceService;
     }
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<Map<String, Object>> createPerformancePost(@RequestBody UnionPerformanceGetDTO unionPerformanceGetDTO, @AuthenticationPrincipal UserDetails userDetails){
         Long postId = unionPerformanceService.createPerformancePost(unionPerformanceGetDTO, userDetails);
         Map<String, Object> response = new HashMap<>();
