@@ -2,97 +2,126 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Register</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 350px;
-            text-align: center;
-        }
-        h2 {
-            margin-bottom: 20px;
-        }
-        form div {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="text"], input[type="password"], input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #4CAF50;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .error-message {
-            color: red;
-            margin-top: 15px;
-        }
-    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<div class="container">
-    <h2>Register</h2>
-    <form th:action="@{/register}" method="post">
-        <div>
-            <label>Username</label>
-            <input type="text" name="username" required>
-        </div>
-        <div>
-            <label>School ID</label>
-            <input type="text" name="schoolId" required>
-        </div>
-        <div>
-            <label>Password</label>
-            <input type="password" name="password" required>
-        </div>
-        <div>
-            <label>Nickname</label>
-            <input type="text" name="nickname" required>
-        </div>
-        <div>
-            <label>First Name</label>
-            <input type="text" name="firstName" required>
-        </div>
-        <div>
-            <label>Last Name</label>
-            <input type="text" name="lastName" required>
-        </div>
-        <div>
-            <label>Email</label>
-            <input type="email" name="email" required>
-        </div>
-        <button type="submit">Register</button>
-        <div th:if="${error}" class="error-message">
-            <p th:text="${error}"></p>
-        </div>
-    </form>
-</div>
+<h2>Register</h2>
+<form id="registerForm" th:action="@{/dailband/register}" method="post">
+    <div>
+        <label for="schoolId">School ID:</label>
+        <input type="text" id="schoolId" name="schoolId" required>
+    </div>
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <button type="button" id="checkUsernameButton">Check Username</button>
+        <span id="usernameResult"></span>
+    </div>
+    <div>
+        <label for="nickname">Nickname:</label>
+        <input type="text" id="nickname" name="nickname" required>
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <div>
+        <label for="verificationCode">Verification Code:</label>
+        <input type="text" id="verificationCode" name="verificationCode" required>
+        <button type="button" id="sendVerificationCodeButton">Send Verification Code</button>
+    </div>
+    <div>
+        <button type="submit" id="registerButton" disabled>Register</button>
+    </div>
+    <div th:if="${errorMessage}">
+        <p th:text="${errorMessage}" style="color: red;"></p>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function() {
+        var usernameChecked = false;
+        var emailVerified = false;
+
+        $('#checkUsernameButton').click(function() {
+            var username = $('#username').val();
+            $.ajax({
+                url: '/dailband/check-username',
+                type: 'GET',
+                data: { username: username },
+                success: function(response) {
+                    if (response) {
+                        $('#usernameResult').text('Username is available');
+                        $('#usernameResult').css('color', 'green');
+                        usernameChecked = true;
+                    } else {
+                        $('#usernameResult').text('Username is already taken');
+                        $('#usernameResult').css('color', 'red');
+                        usernameChecked = false;
+                    }
+                }
+            });
+        });
+
+        $('#sendVerificationCodeButton').click(function() {
+            var email = $('#email').val();
+            $.ajax({
+                url: '/dailband/send-verification-code',
+                type: 'POST',
+                data: { email: email },
+                success: function() {
+                    alert('Verification code sent to ' + email);
+                }
+            });
+        });
+
+        $('#verificationCode').on('input', function() {
+            var code = $(this).val();
+            if (code.length === 6) {
+                $('#verifyCodeButton').prop('disabled', false);
+            } else {
+                $('#verifyCodeButton').prop('disabled', true);
+            }
+        });
+
+        $('#verifyCodeButton').click(function() {
+            var email = $('#email').val();
+            var code = $('#verificationCode').val();
+            $.ajax({
+                url: '/dailband/verify-code',
+                type: 'POST',
+                data: { email: email, code: code },
+                success: function(response) {
+                    if (response) {
+                        $('#verificationResult').text('Email verified');
+                        $('#verificationResult').css('color', 'green');
+                        emailVerified = true;
+                        $('#registerButton').prop('disabled', false);
+                    } else {
+                        $('#verificationResult').text('Verification failed');
+                        $('#verificationResult').css('color', 'red');
+                        emailVerified = false;
+                        $('#registerButton').prop('disabled', true);
+                    }
+                }
+            });
+        });
+
+        $('#registerForm').submit(function(event) {
+            if (!usernameChecked) {
+                alert("Please check username availability before submitting");
+                event.preventDefault();
+            }
+            if (!emailVerified) {
+                alert("Please verify your email before submitting");
+                event.preventDefault();
+            }
+        });
+    });
+</script>
 </body>
 </html>

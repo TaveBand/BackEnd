@@ -1,5 +1,6 @@
 package ys_band.develop.service;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,46 +20,49 @@ import java.util.Optional;
 @Service
 public class UserService implements UserDetailsService {
 
-    // 사용자 정보를 처리하는 UserRepository와 비밀번호를 암호화하는 BCryptPasswordEncoder를 주입받음
-    private final UserRepository userRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
-
-    // 생성자를 통해 UserRepository와 BCryptPasswordEncoder 주입
     @Autowired
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private UserRepository userRepository;
 
-    // ID로 사용자를 조회하는 메서드
-    public Optional<User> findById(Long id) {
-        return userRepository.findById(id);
-    }
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
-    // 사용자 이름으로 사용자를 조회하는 메서드
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
+    @Autowired
+    private HttpSession session;
 
-    // 새로운 사용자를 저장하는 메서드
-    public void save(User user) {
-        // 비밀번호를 암호화하여 저장
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-    }
-
-    // UserDetailsService 인터페이스의 메서드를 구현하여 사용자 이름으로 사용자 정보를 로드
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // 사용자 이름으로 사용자 정보를 조회
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        // Spring Security의 User 객체를 빌더 패턴으로 생성하여 반환
+        // UserDto를 세션에 저장
+        UserGetDto userDto = UserDtoConverter.toUserGetDto(user);
+        session.setAttribute("user", userDto);
+
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .roles("USER")
                 .build();
+    }
+
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public boolean isUsernameUnique(String username) {
+        return !userRepository.findByUsername(username).isPresent();
+    }
+
+    public void save(UserPostDto userPostDto) {
+        if (!isUsernameUnique(userPostDto.getUsername())) {
+            throw new IllegalArgumentException("Username is already taken");
+        }
+        User user = UserDtoConverter.toUserEntity(userPostDto);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 }
