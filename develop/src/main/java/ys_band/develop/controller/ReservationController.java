@@ -32,8 +32,8 @@ public class ReservationController {
     }
 
     /**
+     * 없어도 되는 듯함? mypage 컨트롤러에서 구현?
      * 현재 세션의 사용자 ID로 해당 사용자가 소유한 예약들을 조회합니다.
-     *
      * @param session 현재 HTTP 세션
      * @return 해당 사용자가 소유한 예약 목록
      */
