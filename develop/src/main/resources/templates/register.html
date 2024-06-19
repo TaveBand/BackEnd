@@ -28,11 +28,13 @@
     <div>
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
+        <button type="button" id="sendVerificationCodeButton">Send Verification Code</button>
     </div>
     <div>
         <label for="verificationCode">Verification Code:</label>
         <input type="text" id="verificationCode" name="verificationCode" required>
-        <button type="button" id="sendVerificationCodeButton">Send Verification Code</button>
+        <button type="button" id="verifyCodeButton">Verify Code</button>
+        <span id="verificationResult"></span>
     </div>
     <div>
         <button type="submit" id="registerButton" disabled>Register</button>
@@ -77,15 +79,6 @@
                     alert('Verification code sent to ' + email);
                 }
             });
-        });
-
-        $('#verificationCode').on('input', function() {
-            var code = $(this).val();
-            if (code.length === 6) {
-                $('#verifyCodeButton').prop('disabled', false);
-            } else {
-                $('#verifyCodeButton').prop('disabled', true);
-            }
         });
 
         $('#verifyCodeButton').click(function() {

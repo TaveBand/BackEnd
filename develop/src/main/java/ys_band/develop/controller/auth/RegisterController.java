@@ -39,8 +39,9 @@ public class RegisterController {
             model.addAttribute("errorMessage", "Username is already taken");
             return "register";
         }
+        // 인증 코드는 클라이언트에서 검증
         userService.save(userPostDto);
-        return "redirect:/dailband";
+        return "redirect:/login";
     }
 
     @GetMapping("/dailband/check-username")
