@@ -4,8 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import ys_band.develop.domain.Post;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post,Long> {
-    List<Post> findAllByBoardBoardId(Long board_id);
+    Optional<Post> findByPostIdAndBoardBoardId(Long postId, Long boardId);
+    List<Post> findAllByBoardBoardId(Long boardId);
 
 }
