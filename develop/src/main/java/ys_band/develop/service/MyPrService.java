@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import ys_band.develop.domain.Board;
+import ys_band.develop.domain.Comment;
 import ys_band.develop.domain.File;
 import ys_band.develop.domain.Post;
 import ys_band.develop.domain.User;
+import ys_band.develop.dto.comment.CommentPostDTO;
 import ys_band.develop.dto.mypr.MyPrGetDTO;
 import ys_band.develop.dto.mypr.MyPrPostDTO;
+import ys_band.develop.dto.mypr.MyPrPostDTOWithoutComments;
 import ys_band.develop.exception.UserException;
 import ys_band.develop.repository.BoardRepository;
 import ys_band.develop.repository.FileRepository;
@@ -17,6 +20,7 @@ import ys_band.develop.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MyPrService {
@@ -60,17 +64,17 @@ public class MyPrService {
             postRepository.save(post);
         }
 
-        return post.getPost_id();
+        return post.getPostId();
     }
 
-    public List<MyPrPostDTO> getAllMyPrPosts() {
+    public List<MyPrPostDTOWithoutComments> getAllMyPrPosts() {
         Board board = boardRepository.findByName("pr")
                 .orElseThrow(() -> new RuntimeException("Board not found"));
         List<Post> posts = postRepository.findAllByBoardBoardId(board.getBoardId());
 
-        List<MyPrPostDTO> myPrPostDTOs = new ArrayList<>();
+        List<MyPrPostDTOWithoutComments> myPrPostDTOs = new ArrayList<>();
         for (Post post : posts) {
-            myPrPostDTOs.add(transformDTO(post));
+            myPrPostDTOs.add(convertToMyPrPostDTOWithoutComments(post));
         }
 
         return myPrPostDTOs;
@@ -78,7 +82,7 @@ public class MyPrService {
 
     public MyPrPostDTO getMyPrPost(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new UserException("Post not found"));
-        return transformDTO(post);
+        return convertToMyPrPostDTO(post);
     }
 
     public MyPrPostDTO updateMyPrPost(Long postId, MyPrGetDTO myPrGetDTO, UserDetails userDetails) {
@@ -101,7 +105,7 @@ public class MyPrService {
         }
 
         Post updatedPost = postRepository.save(post);
-        return transformDTO(updatedPost);
+        return convertToMyPrPostDTO(updatedPost);
     }
 
     public void deleteMyPrPost(Long postId, UserDetails userDetails) {
@@ -114,9 +118,9 @@ public class MyPrService {
         postRepository.deleteById(postId);
     }
 
-    private MyPrPostDTO transformDTO(Post post) {
+    private MyPrPostDTO convertToMyPrPostDTO(Post post) {
         MyPrPostDTO myPrPostDTO = new MyPrPostDTO();
-        myPrPostDTO.setPost_id(post.getPost_id());
+        myPrPostDTO.setPost_id(post.getPostId());
         myPrPostDTO.setTitle(post.getTitle());
         myPrPostDTO.setContent(post.getContent());
 
@@ -127,10 +131,38 @@ public class MyPrService {
         myPrPostDTO.setModifiedAt(post.getModified_at());
         myPrPostDTO.setNickname(post.getUser().getNickname());
         myPrPostDTO.setEmail(post.getUser().getEmail());
-        myPrPostDTO.setComments(post.getComments());
+        myPrPostDTO.setComments(post.getComments().stream()
+                .map(this::convertToCommentPostDTO)
+                .collect(Collectors.toList()));
         myPrPostDTO.setSessions(post.getUser().getSessions());
 
         return myPrPostDTO;
+    }
+
+    private MyPrPostDTOWithoutComments convertToMyPrPostDTOWithoutComments(Post post) {
+        MyPrPostDTOWithoutComments myPrPostDTO = new MyPrPostDTOWithoutComments();
+        myPrPostDTO.setPostId(post.getPostId());
+        myPrPostDTO.setTitle(post.getTitle());
+        myPrPostDTO.setContent(post.getContent());
+
+        if (post.getFile() != null) {
+            myPrPostDTO.setFileUrl(post.getFile().getFile_url());
+        }
+        myPrPostDTO.setCreatedAt(post.getCreated_at());
+        myPrPostDTO.setNickname(post.getUser().getNickname());
+        myPrPostDTO.setEmail(post.getUser().getEmail());
+
+        return myPrPostDTO;
+    }
+
+    private CommentPostDTO convertToCommentPostDTO(Comment comment) {
+        CommentPostDTO commentPostDTO = new CommentPostDTO();
+        commentPostDTO.setCommentId(comment.getComment_id());
+        commentPostDTO.setContent(comment.getContent());
+        commentPostDTO.setCreatedAt(comment.getCreated_at());
+        commentPostDTO.setModifiedAt(comment.getModified_at());
+        commentPostDTO.setNickname(comment.getUser().getNickname());
+        return commentPostDTO;
     }
 
     private String determineFileType(String fileUrl) {

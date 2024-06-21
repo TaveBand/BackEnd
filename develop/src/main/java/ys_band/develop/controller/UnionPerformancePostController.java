@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import ys_band.develop.dto.unionperformance.UnionPerformanceGetDTO;
 import ys_band.develop.dto.unionperformance.UnionPerformancePostDTO;
+import ys_band.develop.dto.unionperformance.UnionPerformancePostDTOWithoutComments;
 import ys_band.develop.service.UnionPerformanceService;
 
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class UnionPerformancePostController {
     }
     @GetMapping
     public ResponseEntity<Map<String, Object>> getAllPerformancePosts() {
-        List<UnionPerformancePostDTO> posts = unionPerformanceService.getAllUnionPerformancePosts();
+        List<UnionPerformancePostDTOWithoutComments> posts = unionPerformanceService.getAllUnionPerformancePosts();
         Map<String, Object> response = new HashMap<>();
         response.put("posts", posts);
 //      response.put("currentPage", page);

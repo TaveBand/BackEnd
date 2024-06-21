@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import ys_band.develop.dto.mypr.MyPrGetDTO;
 import ys_band.develop.dto.mypr.MyPrPostDTO;
+import ys_band.develop.dto.mypr.MyPrPostDTOWithoutComments;
 import ys_band.develop.service.MyPrService;
 
 import java.util.HashMap;
@@ -36,7 +37,7 @@ public class MyPrPostController {
 
     @GetMapping
     public ResponseEntity<Map<String, Object>> getAllMyPrPosts() {
-        List<MyPrPostDTO> posts = myPrService.getAllMyPrPosts();
+        List<MyPrPostDTOWithoutComments> posts = myPrService.getAllMyPrPosts();
         Map<String, Object> response = new HashMap<>();
         response.put("posts", posts);
         return ResponseEntity.ok(response);
