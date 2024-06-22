@@ -3,14 +3,15 @@ package ys_band.develop.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
+@Data
 @Entity
-@Getter
-@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Comment {
 
     @Id

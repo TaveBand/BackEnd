@@ -1,14 +1,15 @@
 package ys_band.develop.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
+@Data
 @Entity
-@Getter
-@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class File {
 
     @Id
@@ -23,6 +24,8 @@ public class File {
 
     @Column(nullable = false)
     private LocalDateTime created_at;
+
+    private String originalFileName;        // 재현.
 
     @OneToOne
     @JoinColumn(name = "post_id")

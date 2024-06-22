@@ -13,8 +13,13 @@ import java.util.List;
 @RestController
 public class ReservationController {
 
-    @Autowired
+
     private ReservationService reservationService;
+
+    @Autowired
+    public ReservationController(ReservationService reservationService){
+        this.reservationService = reservationService;
+    }
 
     /**
      * 특정 공연을 예약합니다.
