@@ -60,9 +60,11 @@ public class User {
     private List<Post> posts;
 
 
+    // 수정된 부분입니다: cascade = CascadeType.ALL, orphanRemoval = true 추가
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Performance> performances;
 
+    // 수정된 부분입니다: cascade = CascadeType.ALL, orphanRemoval = true 추가
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations;
 
