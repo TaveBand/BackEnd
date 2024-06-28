@@ -1,16 +1,15 @@
-package ys_band.develop.dto.reservation;
+package ys_band.develop.dto.youtube;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import lombok.Setter;
-
+@JsonNaming(
+        PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Getter
 @Setter
-public class ReservationDto {
-
-    private Long reservationId;
-    private Long performanceId;
+public class YoutubeGetDTO {
+    private String title;
+    private String link;
     private Long userId;
-    private java.sql.Date reservationDate;
 }

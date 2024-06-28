@@ -11,6 +11,7 @@ import ys_band.develop.domain.User;
 import ys_band.develop.dto.comment.CommentPostDTO;
 import ys_band.develop.dto.session.SessionGetDTO;
 import ys_band.develop.dto.session.SessionPostDTO;
+import ys_band.develop.dto.session.SessionPostDTOWithoutComments;
 import ys_band.develop.exception.UserException;
 import ys_band.develop.repository.BoardRepository;
 import ys_band.develop.repository.FileRepository;
@@ -66,13 +67,13 @@ public class SessionService {
         return post.getPostId();
     }
 
-    public List<SessionPostDTO> getAllSessionPosts(Long boardId) {
+    public List<SessionPostDTOWithoutComments> getAllSessionPosts(Long boardId) {
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new RuntimeException("Board not found"));
 
         List<Post> posts = postRepository.findAllByBoardBoardId(board.getBoardId());
 
-        List<SessionPostDTO> sessionPostDTOS = new ArrayList<>();
+        List<SessionPostDTOWithoutComments> sessionPostDTOS = new ArrayList<>();
         for (Post post : posts) {
             sessionPostDTOS.add(convertToSessionPostDTOWithoutComments(post));
         }
@@ -138,8 +139,8 @@ public class SessionService {
         return sessionPostDTO;
     }
 
-    private SessionPostDTO convertToSessionPostDTOWithoutComments(Post post) {
-        SessionPostDTO sessionPostDTO = new SessionPostDTO();
+    private SessionPostDTOWithoutComments convertToSessionPostDTOWithoutComments(Post post) {
+        SessionPostDTOWithoutComments sessionPostDTO = new SessionPostDTOWithoutComments();
         sessionPostDTO.setPostId(post.getPostId());
         sessionPostDTO.setTitle(post.getTitle());
         sessionPostDTO.setContent(post.getContent());

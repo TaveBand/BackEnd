@@ -8,7 +8,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import ys_band.develop.dto.session.SessionGetDTO;
 import ys_band.develop.dto.session.SessionPostDTO;
+import ys_band.develop.dto.session.SessionPostDTOWithoutComments;
+import ys_band.develop.dto.youtube.YoutubeGetDTO;
 import ys_band.develop.service.SessionService;
+import ys_band.develop.service.YoutubeLinkService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,10 +24,17 @@ public class SessionController {
     @Autowired
     private SessionService sessionService;
 
+    @Autowired
+    private YoutubeLinkService youtubeLinkService;
+
     @GetMapping("/{board_id}")
-    public ResponseEntity<List<SessionPostDTO>> getPostsByBoardId(@PathVariable("board_id") Long boardId) {
-        List<SessionPostDTO> posts = sessionService.getAllSessionPosts(boardId);
-        return new ResponseEntity<>(posts, HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> getPostsByBoardId(@PathVariable("board_id") Long boardId) {
+        List<SessionPostDTOWithoutComments> posts = sessionService.getAllSessionPosts(boardId);
+        List<YoutubeGetDTO> youtubes = youtubeLinkService.getAllYoutubeLinksByBoard(boardId);
+        Map<String, Object> response = new HashMap<>();
+        response.put("posts", posts);
+        response.put("youtubes", youtubes);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/{board_id}/{post_id}")

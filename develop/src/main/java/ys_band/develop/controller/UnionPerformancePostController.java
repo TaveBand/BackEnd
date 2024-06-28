@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/dailband/boards/union-performances")
+@RequestMapping("/dailband/boards/matching")
 public class UnionPerformancePostController {
 
     private final UnionPerformanceService unionPerformanceService;

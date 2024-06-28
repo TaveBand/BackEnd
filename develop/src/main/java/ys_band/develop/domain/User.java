@@ -58,6 +58,8 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
+    @OneToMany(mappedBy = "user")
+    private List<Youtube> youtubeList;
 
 
     // 수정된 부분입니다: cascade = CascadeType.ALL, orphanRemoval = true 추가

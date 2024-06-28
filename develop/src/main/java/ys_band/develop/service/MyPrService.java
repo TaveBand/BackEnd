@@ -39,6 +39,9 @@ public class MyPrService {
     }
 
     public Long createMyPrPost(MyPrGetDTO myPrGetDTO, UserDetails userDetails) {
+        if (userDetails == null) {
+            throw new UserException("User not authenticated");
+        }
         User currentUser = userRepository.findByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new UserException("User not found"));
         Board board = boardRepository.findByName("pr")
@@ -151,6 +154,7 @@ public class MyPrService {
         myPrPostDTO.setCreatedAt(post.getCreated_at());
         myPrPostDTO.setNickname(post.getUser().getNickname());
         myPrPostDTO.setEmail(post.getUser().getEmail());
+        myPrPostDTO.setSessions(post.getUser().getSessions());
 
         return myPrPostDTO;
     }
