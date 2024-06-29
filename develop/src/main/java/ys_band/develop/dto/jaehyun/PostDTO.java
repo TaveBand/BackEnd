@@ -1,5 +1,7 @@
 package ys_band.develop.dto.jaehyun;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 import ys_band.develop.domain.Comment;
 import ys_band.develop.domain.Post;
@@ -10,6 +12,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PostDTO{
 
     private Long post_id;
