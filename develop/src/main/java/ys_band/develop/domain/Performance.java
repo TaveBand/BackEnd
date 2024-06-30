@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -48,6 +49,22 @@ public class Performance {
     @Column
     private String image_path;
 
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "modified_at", nullable = false)
+    private LocalDateTime modifiedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        modifiedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        modifiedAt = LocalDateTime.now();
+    }
     public Performance() {
         this.current_seats = 0;
     }
