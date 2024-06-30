@@ -1,6 +1,8 @@
 package ys_band.develop.service;
 
 import jakarta.transaction.Transactional;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import ys_band.develop.domain.Performance;
 import ys_band.develop.domain.User;
@@ -57,10 +59,18 @@ public class PerformanceService {
      */
     @Transactional
     public PerformanceGetDto savePerformance(PerformancePostDto performancePostDto) {
-        User user = userRepository.findById(performancePostDto.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found for id: " + performancePostDto.getUserId()));
+        // 세션에서 UserDetails 가져오기
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+
+        // UserDetails를 통해 사용자 정보 찾기
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found for username: " + username));
+
+        // 공연 저장
         Performance performance = PerformanceDtoConverter.postPerformanceEntity(performancePostDto, user);
         Performance savedPerformance = performanceRepository.save(performance);
+
         return PerformanceDtoConverter.getPerformanceDto(savedPerformance);
     }
 
