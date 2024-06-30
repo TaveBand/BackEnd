@@ -31,7 +31,8 @@ public class HomeController {
 
     @GetMapping("/home")
     public Map<String, Object> home() {
-        List<PerformanceGetDto> performances = performanceService.findAllPerformances();
+        List<PerformanceGetDto> performances = performanceService.findRecentPerformances();
+        // performance 만 최신 recent 4개 뽑기 했음.
         List<MyPrPostDTOWithoutComments> posts = myPrService.getAllMyPrPosts();
 
         return Map.of("performances", performances, "posts", posts); // 여기다가 추가 방식?

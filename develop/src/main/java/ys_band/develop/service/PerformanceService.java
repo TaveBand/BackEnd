@@ -14,7 +14,7 @@ import ys_band.develop.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
-
+import java.util.stream.Collectors;
 
 
 @Service
@@ -95,5 +95,12 @@ public class PerformanceService {
                 .orElseThrow(() -> new IllegalArgumentException("User not found for id: " + userId));
         List<Performance> performances = performanceRepository.findByUser(user);
         return PerformanceDtoConverter.toPerformanceDtoList(performances);
+    }
+
+    @Transactional
+    public List<PerformanceGetDto> findRecentPerformances() {
+        return performanceRepository.findTop2ByOrderByCreatedAtDesc().stream()
+                .map(PerformanceDtoConverter::getPerformanceDto)
+                .collect(Collectors.toList());
     }
 }
