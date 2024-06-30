@@ -62,11 +62,11 @@ public class User {
     private List<Youtube> youtubeList;
 
 
-    // 수정된 부분입니다: cascade = CascadeType.ALL, orphanRemoval = true 추가
+    // Performances 엔티티 설정
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Performance> performances;
 
-    // 수정된 부분입니다: cascade = CascadeType.ALL, orphanRemoval = true 추가
+    // Reservations 엔티티 설정
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations;
 
