@@ -29,6 +29,8 @@ public class Board {
 
     @OneToMany(mappedBy = "board")
     private List<Post> posts;
+    @OneToMany(mappedBy = "board")
+    private List<Youtube> youtube;
 
     @PrePersist
     protected void onCreate() {
