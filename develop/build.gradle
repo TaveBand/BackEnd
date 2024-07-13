@@ -33,8 +33,11 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
+	implementation 'com.mpatric:mp3agic:0.9.1'
+	implementation 'se.michaelthelin.spotify:spotify-web-api-java:8.0.0'
+	implementation group: 'com.github.axet', name: 'TarsosDSP', version: '2.4-1'
 	implementation 'org.springframework.boot:spring-boot-starter-mail' // 메일 전송
+	implementation 'ws.schild:jave-core:3.0.1' // JAVE 라이브러리 추가
 }
 
 tasks.named('test') {
