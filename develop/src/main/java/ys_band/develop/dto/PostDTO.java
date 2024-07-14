@@ -1,21 +1,22 @@
-package ys_band.develop.dto.jaehyun;
+package ys_band.develop.dto;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 import lombok.*;
+import ys_band.develop.domain.BaseTime;
 import ys_band.develop.domain.Comment;
 import ys_band.develop.domain.Post;
 
 import java.util.List;
 
+
 @Data
 @Builder
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class PostDTO{
+public class PostDTO extends BaseTime {
 
-    private Long post_id;
+    private Long postId;
 
 
     @NonNull
@@ -28,7 +29,7 @@ public class PostDTO{
 
     public static PostDTO fromEntity(Post post){
         PostDTO postDTO = new PostDTO();
-        postDTO.setPost_id(post.getPostId());
+        postDTO.setPostId(post.getPostId());
         postDTO.setTitle(post.getTitle());
         postDTO.setContent(post.getContent());
 
@@ -40,12 +41,8 @@ public class PostDTO{
 
         return postDTO;
     }
-    public Post toEntity() {
-        Post post = new Post();
-        post.setTitle(this.title);
-        post.setContent(this.content);
-        return post;
-    }
 
 
 }
+
+

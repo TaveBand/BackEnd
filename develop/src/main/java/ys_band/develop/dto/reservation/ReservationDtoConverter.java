@@ -13,7 +13,7 @@ public class ReservationDtoConverter {
         ReservationDto dto = new ReservationDto();
         dto.setReservationId(reservation.getReservation_id());
         dto.setPerformanceId(reservation.getPerformance().getPerformance_id());
-        dto.setUserId(reservation.getUser().getUser_id());
+        dto.setUserId(reservation.getUser().getUserId());
         dto.setReservationDate(reservation.getReservation_date());
         return dto;
     }

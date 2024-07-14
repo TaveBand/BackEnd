@@ -1,4 +1,4 @@
-package ys_band.develop.service;
+package ys_band.develop.service.Post;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,7 +66,7 @@ public class YoutubeLinkService {
                     YoutubeGetDTO responseDTO = new YoutubeGetDTO();
                     responseDTO.setLink(youtube.getLink());
                     responseDTO.setTitle(youtube.getTitle());
-                    responseDTO.setUserId(youtube.getUser().getUser_id());
+                    responseDTO.setUserId(youtube.getUser().getUserId());
                     return responseDTO;
                 })
                 .collect(Collectors.toList());

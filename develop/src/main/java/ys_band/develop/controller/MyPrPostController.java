@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ys_band.develop.dto.mypr.MyPrGetDTO;
 import ys_band.develop.dto.mypr.MyPrPostDTO;
 import ys_band.develop.dto.mypr.MyPrPostDTOWithoutComments;
-import ys_band.develop.service.MyPrService;
+import ys_band.develop.service.Post.MyPrService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,8 +27,8 @@ public class MyPrPostController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> createMyPrPost(@RequestBody MyPrGetDTO myPrGetDTO, @AuthenticationPrincipal UserDetails userDetails) {
-        Long postId = myPrService.createMyPrPost(myPrGetDTO, userDetails);
+    public ResponseEntity<Map<String, Object>> createMyPrPost(@RequestBody MyPrPostDTO myPrPostDTO, @AuthenticationPrincipal UserDetails userDetails) {
+        Long postId = myPrService.createMyPrPost(myPrPostDTO, userDetails);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "created!");
         response.put("post_id", postId);

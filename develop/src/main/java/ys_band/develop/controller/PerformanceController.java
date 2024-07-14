@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ys_band.develop.dto.performance.PerformancePostDto;
 import ys_band.develop.dto.performance.PerformanceGetDto;
-import ys_band.develop.service.PerformanceService;
+import ys_band.develop.service.Post.PerformanceService;
 
 import java.util.List;
 import java.util.Optional;
@@ -76,7 +76,7 @@ public class PerformanceController {
      */
     @GetMapping("/dailband/user/myperformances")
     public ResponseEntity<List<PerformanceGetDto>> getMyPerformances(HttpSession session) {
-        Long userId = (Long) session.getAttribute("user_id");
+        Long userId = (Long) session.getAttribute("userId");
         if (userId == null) {
             return ResponseEntity.status(401).build(); // Unauthorized
         } // user ID 없을 시 401 에러 반환.

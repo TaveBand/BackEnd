@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ys_band.develop.dto.reservation.ReservationDto;
-import ys_band.develop.service.ReservationService;
+import ys_band.develop.service.Post.ReservationService;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class ReservationController {
      */
     @GetMapping("/dailband/user/myreservations")
     public ResponseEntity<List<ReservationDto>> getMyReservations(HttpSession session) {
-        Long userId = (Long) session.getAttribute("user_id");
+        Long userId = (Long) session.getAttribute("userId");
         if (userId == null) {
             return ResponseEntity.status(401).build(); // Unauthorized
         }

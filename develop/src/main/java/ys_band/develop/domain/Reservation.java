@@ -1,6 +1,7 @@
 package ys_band.develop.domain;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +11,8 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class Reservation {
+@EqualsAndHashCode(callSuper = true)
+public class Reservation extends BaseTime{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +26,6 @@ public class Reservation {
     private Performance performance;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "userId", nullable = false)
     private User user;
 }
