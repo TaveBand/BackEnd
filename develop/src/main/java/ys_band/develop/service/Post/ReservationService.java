@@ -1,4 +1,4 @@
-package ys_band.develop.service;
+package ys_band.develop.service.Post;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

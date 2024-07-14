@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ys_band.develop.dto.unionperformance.UnionPerformanceGetDTO;
 import ys_band.develop.dto.unionperformance.UnionPerformancePostDTO;
 import ys_band.develop.dto.unionperformance.UnionPerformancePostDTOWithoutComments;
-import ys_band.develop.service.UnionPerformanceService;
+import ys_band.develop.service.Post.UnionPerformanceService;
 
 import java.util.HashMap;
 import java.util.List;

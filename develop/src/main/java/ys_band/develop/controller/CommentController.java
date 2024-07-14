@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import ys_band.develop.dto.comment.CommentGetDTO;
 import ys_band.develop.dto.comment.CommentPostDTO;
-import ys_band.develop.service.CommentService;
+import ys_band.develop.service.Post.CommentService;
 
 import java.util.HashMap;
 import java.util.List;
