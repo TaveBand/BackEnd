@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class File {
+@EqualsAndHashCode(callSuper = true)
+public class File extends BaseTime{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +23,6 @@ public class File {
     @Column(nullable = false)
     private String file_type;
 
-    @Column(nullable = false)
-    private LocalDateTime created_at;
 
     private String originalFileName;        // 재현.
 
@@ -31,8 +30,4 @@ public class File {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @PrePersist
-    protected void onCreate() {
-        created_at = LocalDateTime.now();
-    }
 }
