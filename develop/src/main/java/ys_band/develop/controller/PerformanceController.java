@@ -68,20 +68,5 @@ public class PerformanceController {
         return ResponseEntity.noContent().build();
     }
 
-    /**
-     * 없어도 되는 듯함...?
-     * 현재 세션의 사용자 ID로 해당 사용자가 소유한 공연들을 조회합니다.
-     * @param session 현재 HTTP 세션
-     * @return 해당 사용자가 소유한 공연 목록
-     */
-    @GetMapping("/dailband/user/myperformances")
-    public ResponseEntity<List<PerformanceGetDto>> getMyPerformances(HttpSession session) {
-        Long userId = (Long) session.getAttribute("userId");
-        if (userId == null) {
-            return ResponseEntity.status(401).build(); // Unauthorized
-        } // user ID 없을 시 401 에러 반환.
 
-        List<PerformanceGetDto> performances = performanceService.findPerformancesByUserId(userId);
-        return ResponseEntity.ok(performances);
-    }
 }
