@@ -1,6 +1,7 @@
 package ys_band.develop.controller;
 
 
+import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import ys_band.develop.domain.User;
 import ys_band.develop.dto.performance.PerformanceGetDto;
 import ys_band.develop.dto.post.PostDTO;
-import ys_band.develop.dto.user.UserGetDto;
-import ys_band.develop.dto.user.UserPostDto;
+import ys_band.develop.dto.user.*;
 import ys_band.develop.service.Post.PerformanceService;
 import ys_band.develop.service.UserService;
 
@@ -91,9 +91,9 @@ public class UserController {
 
     // 사용자가 스크랩한 게시물 조회
     /*
-    @GetMapping("/{user_id}/scraps")
-    public ResponseEntity<List<PostDTO>> getMyScrappedPosts(@PathVariable String user_id) {
-        return ResponseEntity.ok(userService.getMyScrappedPosts(user_id));
+    @GetMapping("/{userId}/scraps")
+    public ResponseEntity<List<PostDTO>> getMyScrappedPosts(@PathVariable String userId) {
+        return ResponseEntity.ok(userService.getMyScrappedPosts(userId));
     }
     */
 

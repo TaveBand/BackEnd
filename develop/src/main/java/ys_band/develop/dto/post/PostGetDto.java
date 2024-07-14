@@ -7,6 +7,6 @@ public class PostGetDto {
     private Long post_id;
     private String title;
     private String content;
-    private Long user_id;
+    private Long userId;
     // 추가 필드들
 }

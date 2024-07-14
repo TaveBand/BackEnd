@@ -44,7 +44,7 @@ public class ReservationController {
      */
     @GetMapping("/dailband/user/myreservations")
     public ResponseEntity<List<ReservationDto>> getMyReservations(HttpSession session) {
-        Long userId = (Long) session.getAttribute("user_id");
+        Long userId = (Long) session.getAttribute("userId");
         if (userId == null) {
             return ResponseEntity.status(401).build(); // Unauthorized
         }

@@ -9,9 +9,8 @@ import ys_band.develop.domain.User;
 import ys_band.develop.dto.mypr.MyPrGetDTO;
 import ys_band.develop.dto.mypr.MyPrPostDTOWithoutComments;
 import ys_band.develop.dto.performance.PerformanceGetDto;
-import ys_band.develop.service.MyPrService;
-import ys_band.develop.service.PerformanceService;
-import ys_band.develop.service.UserService;
+import ys_band.develop.service.Post.MyPrService;
+import ys_band.develop.service.Post.PerformanceService;
 
 import java.util.List;
 import java.util.Map;

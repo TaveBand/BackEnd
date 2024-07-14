@@ -3,6 +3,7 @@ package ys_band.develop.dto;
 
 import lombok.*;
 import ys_band.develop.domain.BaseTime;
+import ys_band.develop.domain.Comment;
 import ys_band.develop.domain.Post;
 
 import java.util.List;

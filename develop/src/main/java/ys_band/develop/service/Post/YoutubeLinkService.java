@@ -66,7 +66,7 @@ public class YoutubeLinkService {
                     YoutubeGetDTO responseDTO = new YoutubeGetDTO();
                     responseDTO.setLink(youtube.getLink());
                     responseDTO.setTitle(youtube.getTitle());
-                    responseDTO.setUserId(youtube.getUser().getUser_id());
+                    responseDTO.setUserId(youtube.getUser().getUserId());
                     return responseDTO;
                 })
                 .collect(Collectors.toList());

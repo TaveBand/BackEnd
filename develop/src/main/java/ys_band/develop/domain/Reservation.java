@@ -26,6 +26,6 @@ public class Reservation extends BaseTime{
     private Performance performance;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "userId", nullable = false)
     private User user;
 }

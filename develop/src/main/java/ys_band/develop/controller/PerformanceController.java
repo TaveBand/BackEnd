@@ -76,7 +76,7 @@ public class PerformanceController {
      */
     @GetMapping("/dailband/user/myperformances")
     public ResponseEntity<List<PerformanceGetDto>> getMyPerformances(HttpSession session) {
-        Long userId = (Long) session.getAttribute("user_id");
+        Long userId = (Long) session.getAttribute("userId");
         if (userId == null) {
             return ResponseEntity.status(401).build(); // Unauthorized
         } // user ID 없을 시 401 에러 반환.

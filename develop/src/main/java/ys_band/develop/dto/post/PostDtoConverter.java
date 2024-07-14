@@ -9,7 +9,7 @@ public class PostDtoConverter {
         dto.setPost_id(post.getPostId());
         dto.setTitle(post.getTitle());
         dto.setContent(post.getContent());
-        dto.setUser_id(post.getUser().getUser_id());
+        dto.setUserId(post.getUser().getUserId());
         // 추가 필드들 변환
         return dto;
     }

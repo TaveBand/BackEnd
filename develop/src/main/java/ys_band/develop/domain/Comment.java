@@ -7,11 +7,9 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
 @Entity
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
 public class Comment extends BaseTime {
 
@@ -28,7 +26,7 @@ public class Comment extends BaseTime {
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "userId", nullable = false)
     private User user;
 
     @ManyToOne

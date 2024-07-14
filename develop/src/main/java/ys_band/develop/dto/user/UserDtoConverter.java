@@ -9,22 +9,10 @@ import java.util.stream.Collectors;
 
 public class UserDtoConverter {
 
-    public static User toUserEntity(UserPostDto dto) {
-        User user = new User();
-        user.setSchoolId(dto.getSchoolId());
-        user.setPassword(dto.getPassword());
-        user.setUsername(dto.getUsername());
-        user.setNickname(dto.getNickname());
-        user.setEmail(dto.getEmail());
-        user.setSession(dto.getSession());
-        user.setCreatedAt(LocalDateTime.now());
-        user.setModifiedAt(LocalDateTime.now());
-        return user;
-    }
 
     public static UserGetDto toUserGetDto(User user) {
         UserGetDto dto = new UserGetDto();
-        dto.setUserId(user.getUser_id());
+        dto.setUserId(user.getUserId());
         dto.setSchoolId(user.getSchoolId());
         dto.setUsername(user.getUsername());
         dto.setNickname(user.getNickname());

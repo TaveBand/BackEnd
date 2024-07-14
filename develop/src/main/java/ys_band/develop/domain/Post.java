@@ -32,7 +32,7 @@ public class Post extends BaseTime{
     private LocalDateTime modified_at;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "userId", nullable = false)
     private User user;
 
     @ManyToOne

@@ -8,9 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ys_band.develop.domain.Post;
 import ys_band.develop.domain.Session;
 import ys_band.develop.domain.User;
-import ys_band.develop.dto.post.PostDTO;
-import ys_band.develop.dto.user.UserGetDto;
-import ys_band.develop.dto.user.UserPostDto;
+import ys_band.develop.dto.post.*;
+import ys_band.develop.dto.user.*;
 import ys_band.develop.repository.PostRepository;
 import ys_band.develop.repository.SessionRepository;
 import ys_band.develop.repository.UserRepository;
@@ -79,6 +78,7 @@ public class UserService {
         List<Post> posts = postRepository.findAllByUserUserId(userId);
         return posts.stream().map(PostDTO::fromEntity).collect(Collectors.toList());
     }
+
     //관리자 권한으로 사용자 정보 가져오기
     @Transactional
     public Optional<User> getUserByAdmin(String username) {
@@ -92,6 +92,7 @@ public class UserService {
         return user.get().getUserId();
 
     }
+
     private void updateUserSessions(User user, List<Long> sessionIds) {
         System.out.println("업데이트할 세션 ID 리스트: " + sessionIds);
         user.getSessions().clear();
@@ -104,3 +105,4 @@ public class UserService {
 
 
     }
+}
