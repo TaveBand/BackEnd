@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Comment {
+@EqualsAndHashCode(callSuper = true)
+public class Comment extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,11 +25,6 @@ public class Comment {
     @Column(nullable = false)
     private boolean is_delete;
 
-    @Column(nullable = false)
-    private LocalDateTime created_at;
-
-    @Column(nullable = false)
-    private LocalDateTime modified_at;
 
     @ManyToOne
     @JsonIgnore
@@ -39,15 +35,4 @@ public class Comment {
     @JsonIgnore
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
-
-    @PrePersist
-    protected void onCreate() {
-        created_at = LocalDateTime.now();
-        modified_at = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        modified_at = LocalDateTime.now();
-    }
 }

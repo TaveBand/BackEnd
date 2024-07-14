@@ -2,6 +2,7 @@ package ys_band.develop.domain;
 
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,9 +10,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 @JsonNaming
 @Entity
+@EqualsAndHashCode(callSuper = true)
 @Getter
 @Setter
-public class Post {
+public class Post extends BaseTime{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,14 +48,4 @@ public class Post {
     @OneToOne(mappedBy = "post")
     private File file;
 
-    @PrePersist
-    protected void onCreate() {
-        created_at = LocalDateTime.now();
-        modified_at = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        modified_at = LocalDateTime.now();
-    }
 }
