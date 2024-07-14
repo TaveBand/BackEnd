@@ -1,4 +1,4 @@
-package ys_band.develop.service;
+package ys_band.develop.service.Post;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,7 +38,7 @@ public class MyPrService {
         this.boardRepository = boardRepository;
     }
 
-    public Long createMyPrPost(MyPrGetDTO myPrGetDTO, UserDetails userDetails) {
+    public Long createMyPrPost(MyPrPostDTO myPrPostDTO, UserDetails userDetails) {
         if (userDetails == null) {
             throw new UserException("User not authenticated");
         }
@@ -47,15 +47,15 @@ public class MyPrService {
         Board board = boardRepository.findByName("pr")
                 .orElseThrow(() -> new RuntimeException("Board not found"));
         Post post = new Post();
-        post.setTitle(myPrGetDTO.getTitle());
-        post.setContent(myPrGetDTO.getContent());
+        post.setTitle(myPrPostDTO.getTitle());
+        post.setContent(myPrPostDTO.getContent());
         post.setUser(currentUser);
         post.setBoard(board);
 
-        if (myPrGetDTO.getFileUrl() != null) {
+        if (myPrPostDTO.getFileUrl() != null) {
             File file = new File();
-            file.setFile_url(myPrGetDTO.getFileUrl());
-            file.setFile_type(determineFileType(myPrGetDTO.getFileUrl()));
+            file.setFile_url(myPrPostDTO.getFileUrl());
+            file.setFile_type(determineFileType(myPrPostDTO.getFileUrl()));
             // Post 저장
             Post savedPost = postRepository.save(post);
             file.setPost(savedPost);

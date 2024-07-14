@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ys_band.develop.dto.performance.PerformancePostDto;
 import ys_band.develop.dto.performance.PerformanceGetDto;
-import ys_band.develop.service.PerformanceService;
+import ys_band.develop.service.Post.PerformanceService;
 
 import java.util.List;
 import java.util.Optional;

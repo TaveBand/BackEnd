@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ys_band.develop.dto.youtube.YoutubeGetDTO;
 import ys_band.develop.dto.youtube.YoutubePostDTO;
-import ys_band.develop.service.YoutubeLinkService;
+import ys_band.develop.service.Post.YoutubeLinkService;
 
 import java.util.HashMap;
 import java.util.Map;

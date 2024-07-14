@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ys_band.develop.dto.reservation.ReservationDto;
-import ys_band.develop.service.ReservationService;
+import ys_band.develop.service.Post.ReservationService;
 
 import java.util.List;
 
