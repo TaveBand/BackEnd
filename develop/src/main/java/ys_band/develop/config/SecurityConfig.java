@@ -13,6 +13,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.CorsFilter;
+import ys_band.develop.security.JwtAccessDeniedHandler;
+import ys_band.develop.security.JwtAuthenticationEntryPoint;
+import ys_band.develop.security.JwtSecurityConfig;
+import ys_band.develop.security.JwtTokenProvider;
+import ys_band.develop.service.CustomUserDetailService;
 
 @Configuration
 @EnableWebSecurity
