@@ -25,5 +25,7 @@ public class Board extends BaseTime{
 
     @OneToMany(mappedBy = "board")
     private List<Post> posts;
+    @OneToMany(mappedBy = "board")
+    private List<Youtube> youtube;
 
 }
