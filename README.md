@@ -49,113 +49,119 @@ Component를 사용하여 **재사용과 유지보수가 용이**하다는 점�
 
 ## 📂 폴더 구조
  ```
-📂src
-│
-├── App.js
-├── index.js
-├── axios.js
-│
-├── 📂authentication
-│   ├── Login.js
-│   ├── Register.js
-│   ├── Verify.js
-│   ├── Complete.js
-│   ├── AuthContext.js
-│   └── 📂styles
-│       └── Login.css
-│       ├── Register.css
-│       ├── Verify.css
-│       ├── Complete.css
-│       └── AuthContext.css
-│
-├── 📂mainpage
-│   ├── Home.js
-│   └── 📂styles
-│       └── Home.css
-│
-├── 📂mypage
-│   ├── Profile.js
-│   ├── Scrap.js
-│   ├── MyPosts.js
-│   ├── MyPerformances.js
-│   ├── MyReservations.js
-│   └── 📂styles
-│       └── Profile.css
-│       ├── Scrap.css
-│       ├── MyPosts.css
-│       ├── MyPerformances.css
-│       └── MyReservations.css
-│
-├── 📂post
-│   ├── Clubs.js
-│   ├── ClubsDetail.js
-│   ├── PR.js
-│   ├── PRDetail.js
-│   ├── Matching.js
-│   ├── MatchingDetail.js
-│   └── 📂styles
-│       └── Clubs.css
-│       ├── ClubsDetail.css
-│       ├── PR.css
-│       ├── PRDetail.css
-│       ├── Matching.css
-│       └── MatchingDetail.css
-│
-├── 📂performance
-│   ├── UnionPerformance.js
-│   ├── UnionPerformanceDetail.js
-│   ├── Reservation.js
-│   ├── ReservationCompleted.js
-│   └── 📂styles
-│       └── UnionPerformance.css
-│       └── UnionPerformanceDetail.css
-│       └── Reservation.css
-│       └── ReservationCompleted.css
-│
-├── 📂session
-│   ├── Bass.js
-│   ├── BassDetail.js
-│   ├── Drum.js
-│   ├── DrumDetail.js
-│   ├── Guitar.js
-│   ├── GuitarDetail.js
-│   ├── Keyboard.js
-│   ├── KeyboardDetail.js
-│   ├── Vocal.js
-│   ├── VocalDetail.js
-│   └── 📂styles
-│       └── Drum.css
-│       └── DrumDetail.css
-│
-├── 📂voiceanalysis
-│   ├── VoiceAnalysis.js
-│   ├── Record.js
-│   ├── RecordWaiting.js
-│   ├── RecordResult.js
-│   ├── Recommendation.js
-│   └── 📂styles
-│       └── VoiceAnalysis.css
-│       └── Record.css
-│       └── RecordWaiting.css
-│       └── RecordResult.css
-│       └── Recommendation.css
-│
-├── 📂shared
-│   ├── BoardBtns.js
-│   ├── Comment.js
-│   ├── Header.js
-│   ├── Pagenumber.js
-│   ├── SessionBtns.js
-│   ├── Sidebar.js
-│   ├── Toggle.js
-│   └── 📂styles
-│       └── BoardBtns.css
-│       ├── Comment.css
-│       ├── Header.css
-│       ├── Pagenumber.css
-│       ├── SessionBtns.css
-│       ├── Sidebar.css
-│       └── Toggle.css
+├── main
+│   ├── java
+│   │   └── ys_band
+│   │       └── develop
+│   │           ├── DailBandApplication.java
+│   │           ├── config
+│   │           │   ├── CorsConfig.java
+│   │           │   └── SecurityConfig.java
+│   │           ├── controller
+│   │           │   ├── CommentController.java
+│   │           │   ├── HomeController.java
+│   │           │   ├── MyPrPostController.java
+│   │           │   ├── PerformanceController.java
+│   │           │   ├── PostController.java
+│   │           │   ├── ReservationController.java
+│   │           │   ├── SessionController.java
+│   │           │   ├── SongController.java
+│   │           │   ├── UnionPerformancePostController.java
+│   │           │   ├── UserController.java
+│   │           │   ├── YoutubeLinkController.java
+│   │           │   └── auth
+│   │           │       ├── LoginController.java
+│   │           │       └── RegisterController.java
+│   │           ├── domain
+│   │           │   ├── Authority.java
+│   │           │   ├── BaseTime.java
+│   │           │   ├── Board.java
+│   │           │   ├── Comment.java
+│   │           │   ├── File.java
+│   │           │   ├── Performance.java
+│   │           │   ├── Post.java
+│   │           │   ├── Reservation.java
+│   │           │   ├── Scrap.java
+│   │           │   ├── Session.java
+│   │           │   ├── Song.java
+│   │           │   ├── User.java
+│   │           │   └── Youtube.java
+│   │           ├── dto
+│   │           │   ├── JwtTokenDTO.java
+│   │           │   ├── LoginDTO.java
+│   │           │   ├── PostDTO.java
+│   │           │   ├── UserDTO.java
+│   │           │   ├── comment
+│   │           │   │   ├── CommentGetDTO.java
+│   │           │   │   └── CommentPostDTO.java
+│   │           │   ├── mypr
+│   │           │   │   ├── MyPrGetDTO.java
+│   │           │   │   ├── MyPrPostDTO.java
+│   │           │   │   └── MyPrPostDTOWithoutComments.java
+│   │           │   ├── performance
+│   │           │   │   ├── PerformanceDtoConverter.java
+│   │           │   │   ├── PerformanceGetDto.java
+│   │           │   │   └── PerformancePostDto.java
+│   │           │   ├── post
+│   │           │   │   ├── PostDTO.java
+│   │           │   │   ├── PostDtoConverter.java
+│   │           │   │   └── PostGetDto.java
+│   │           │   ├── reservation
+│   │           │   │   ├── ReservationDto.java
+│   │           │   │   └── ReservationDtoConverter.java
+│   │           │   ├── session
+│   │           │   │   ├── SessionGetDTO.java
+│   │           │   │   ├── SessionPostDTO.java
+│   │           │   │   └── SessionPostDTOWithoutComments.java
+│   │           │   ├── unionperformance
+│   │           │   │   ├── UnionPerformanceGetDTO.java
+│   │           │   │   ├── UnionPerformancePostDTO.java
+│   │           │   │   └── UnionPerformancePostDTOWithoutComments.java
+│   │           │   ├── user
+│   │           │   │   ├── UserDtoConverter.java
+│   │           │   │   ├── UserGetDto.java
+│   │           │   │   └── UserPostDto.java
+│   │           │   └── youtube
+│   │           │       ├── YoutubeGetDTO.java
+│   │           │       └── YoutubePostDTO.java
+│   │           ├── exception
+│   │           │   ├── GlobalExceptionHandler.java
+│   │           │   └── UserException.java
+│   │           ├── repository
+│   │           │   ├── BoardRepository.java
+│   │           │   ├── CommentRepository.java
+│   │           │   ├── FileRepository.java
+│   │           │   ├── PerformanceRepository.java
+│   │           │   ├── PostRepository.java
+│   │           │   ├── ReservationRepository.java
+│   │           │   ├── SessionRepository.java
+│   │           │   ├── SongRepository.java
+│   │           │   ├── UserRepository.java
+│   │           │   └── YoutubeRepository.java
+│   │           ├── security
+│   │           │   ├── JwtAccessDeniedHandler.java
+│   │           │   ├── JwtAuthenticationEntryPoint.java
+│   │           │   ├── JwtAuthenticationFilter.java
+│   │           │   ├── JwtSecurityConfig.java
+│   │           │   └── JwtTokenProvider.java
+│   │           └── service
+│   │               ├── AudioConversionService.java
+│   │               ├── CustomUserDetailService.java
+│   │               ├── EmailService.java
+│   │               ├── PitchService.java
+│   │               ├── Post
+│   │               │   ├── CommentService.java
+│   │               │   ├── MyPrService.java
+│   │               │   ├── PerformanceService.java
+│   │               │   ├── PostService.java
+│   │               │   ├── ReservationService.java
+│   │               │   ├── UnionPerformanceService.java
+│   │               │   └── YoutubeLinkService.java
+│   │               ├── RecommendationService.java
+│   │               ├── RegisterService.java
+│   │               ├── SessionService.java
+│   │               ├── SpotifyService.java
+│   │               └── UserService.java
 ```
 
 
@@ -166,8 +172,17 @@ Component를 사용하여 **재사용과 유지보수가 용이**하다는 점�
 ![그림1](https://github.com/user-attachments/assets/4fa0cc32-2d77-4387-b137-8032228dd139)
 ![그림2](https://github.com/user-attachments/assets/cf767319-71e4-4dc5-9f38-b495edfec109)
 
-## 💡 주요 기능
-### 📌주요 기능 1
+
+### 📌주요 기능 
+1. 로그인 및 회원가입 서비스
+2. 이메일 인증 서비스
+3. 마이페이지 제공 서비스
+4. 모집 게시판 서비스
+5. My PR 게시판 서비스
+6. 세션 별 게시판 서비스
+7. 녹음파일 기반 음성분석. Spotify API를 활용하여 노래추천 서비스
+8. 연합 공연 홍보 서비스
+9. 공연 예약 서비스
 
 ## 👩‍💻 팀원 소개 & 후기
 | 고운            | 윤영선   | 김민중   | 김시은  | 정재현  | 
