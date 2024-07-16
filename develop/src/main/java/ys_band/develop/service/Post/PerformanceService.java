@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 
-@Service
+@Service("postPerformanceService")
 @Transactional
 public class PerformanceService {
 
